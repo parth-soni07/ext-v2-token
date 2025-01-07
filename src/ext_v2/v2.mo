@@ -29,7 +29,8 @@ import Int64 "mo:base/Int64";
 import List "mo:base/List";
 import Encoding "mo:encoding/Binary";
 //Cap
-import Cap "mo:cap/Cap";
+import Cap "mo:base/Cap";
+// import Cap "mo:cap/Cap";
 import Queue "../motoko/util/Queue";
 import EXTAsset "extAsset";
 
@@ -327,12 +328,17 @@ actor class EXTNFT(init_owner: Principal) = this {
   
   
   //Services
-  let ExternalService_Cap = Cap.Cap(?"lj532-6iaaa-aaaah-qcc7a-cai", cap_rootBucketId);
-  let ExternalService_ICPLedger = actor "ryjl3-tyaaa-aaaaa-aaaba-cai" : actor { 
+  let ExternalService_Cap = Cap.Cap(?"bnz7o-iuaaa-aaaaa-qaaaa-cai", cap_rootBucketId);
+  let ExternalService_ICPLedger = actor "bnz7o-iuaaa-aaaaa-qaaaa-cai" : actor { 
     send_dfx : shared SendArgs -> async Nat64;
     account_balance_dfx : shared query AccountBalanceArgs -> async ICPTs; 
   };
-  
+  // Services
+  // let ExternalService_Cap = Cap.Cap(?"lj532-6iaaa-aaaah-qcc7a-cai", cap_rootBucketId);
+  // let ExternalService_ICPLedger = actor "ryjl3-tyaaa-aaaaa-aaaba-cai" : actor { 
+  //   send_dfx : shared SendArgs -> async Nat64;
+  //   account_balance_dfx : shared query AccountBalanceArgs -> async ICPTs; 
+  // };
   //SYSTEM
   system func preupgrade() {
     data_registryTableState := Iter.toArray(_registry.entries());

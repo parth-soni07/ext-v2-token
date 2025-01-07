@@ -20,3 +20,5 @@ dist/
 src/data
 yarn.lock
 misc/
+
+.mops
